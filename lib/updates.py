@@ -2,8 +2,8 @@ import theano
 import theano.tensor as T
 import numpy as np
 
-from theano_utils import shared0s, floatX, sharedX
-from ops import l2norm
+from lib.theano_utils import shared0s, floatX, sharedX
+from lib.ops import l2norm
 
 def clip_norm(g, c, n):
     if c > 0:

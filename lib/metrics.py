@@ -5,8 +5,8 @@ import theano.tensor as T
 import gc
 import time
 
-from theano_utils import floatX
-from ops import euclidean, cosine
+from lib.theano_utils import floatX
+from lib.ops import euclidean, cosine
 
 from sklearn import metrics
 from sklearn.linear_model import LogisticRegression as LR
@@ -22,12 +22,12 @@ def cv_reg_lr(trX, trY, vaX, vaY, Cs=[0.01, 0.05, 0.1, 0.5, 1., 5., 10., 50., 10
         va_pred = model.predict(vaX)
         tr_acc = metrics.accuracy_score(trY, tr_pred)
         va_acc = metrics.accuracy_score(vaY, va_pred)
-        print '%.4f %.4f %.4f'%(C, tr_acc, va_acc)
+        print('%.4f %.4f %.4f',C, tr_acc, va_acc)
         tr_accs.append(tr_acc)
         va_accs.append(va_acc)
         models.append(model)
     best = np.argmax(va_accs)
-    print 'best model C: %.4f tr_acc: %.4f va_acc: %.4f'%(Cs[best], tr_accs[best], va_accs[best])
+    print('best model C: %.4f tr_acc: %.4f va_acc: %.4f',Cs[best], tr_accs[best], va_accs[best])
     return models[best]
 
 def gpu_nnc_predict(trX, trY, teX, metric='cosine', batch_size=4096):
